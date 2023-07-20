@@ -1,4 +1,5 @@
 import requests 
+from send_email import send_email 
 
 API_KEY = 'db202092afe140189ae03c36492fdd52'
 
@@ -12,5 +13,12 @@ content = request.json()
 #print(content['articles'])
 
 #Access titles 
+
+body = ''
+
 for article in content['articles']:
-    print(article['title'])
+    body = body + article['title'] + '\n' + article['description'] + 2*'\n'
+
+body = body.encode('utf-8')
+
+send_email(body)
